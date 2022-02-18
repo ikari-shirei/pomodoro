@@ -1,0 +1,38 @@
+@import '../index.scss';
+
+.Buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  button {
+    background-color: transparent;
+    border: 0;
+    color: $color1;
+    transition: 0.1s;
+    padding: 8px 16px;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color1;
+      color: $color2;
+      border-radius: 5px;
+      transition: 0.1s;
+    }
+  }
+
+  #start_stop {
+    @include ItalicLightButton();
+    margin-top: 32px;
+    font-size: 24px;
+  }
+
+  #reset {
+    @include ItalicLightButton();
+    font-size: 16px;
+    opacity: 50%;
+    margin-top: 16px;
+  }
+}

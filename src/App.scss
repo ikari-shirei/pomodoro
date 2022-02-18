@@ -1,0 +1,17 @@
+@import './index.scss';
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+
+  color: $color1;
+
+  .total-sb {
+    @include ItalicLight();
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+}

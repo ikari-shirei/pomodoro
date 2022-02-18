@@ -1,0 +1,60 @@
+@import '../index.scss';
+
+.TimeSettings {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: $color1;
+  margin-top: 32px;
+
+  #break-label,
+  #session-label {
+    display: flex;
+
+    #break-decrement,
+    #session-decrement,
+    #break-increment,
+    #session-increment {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 30px;
+      width: 30px;
+      align-self: flex-end;
+      margin: 0 16px;
+      margin-top: 8px;
+
+      background-color: transparent;
+      border: 0;
+
+      .arrow-icon {
+        color: $color1;
+        cursor: pointer;
+      }
+    }
+
+    .label-input {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      label {
+        @include BoldSmall();
+      }
+
+      input {
+        color: $color1;
+        background-color: transparent;
+        border: 0;
+        width: 50px;
+        height: 15px;
+        padding: 4px;
+        text-align: center;
+        font-size: 16px;
+        margin-top: 8px;
+      }
+    }
+  }
+}
