@@ -12,7 +12,12 @@
     color: $color1;
     transition: 0.1s;
     padding: 8px 16px;
+  }
 
+  #start_stop {
+    @include ItalicLightButton();
+    margin-top: 32px;
+    font-size: 24px;
     cursor: pointer;
 
     &:hover {
@@ -23,13 +28,19 @@
     }
   }
 
-  #start_stop {
+  .reset {
     @include ItalicLightButton();
-    margin-top: 32px;
-    font-size: 24px;
+    font-size: 16px;
+    margin-top: 16px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+      transition: 0.1s;
+    }
   }
 
-  #reset {
+  .reset-disabled {
     @include ItalicLightButton();
     font-size: 16px;
     opacity: 50%;
