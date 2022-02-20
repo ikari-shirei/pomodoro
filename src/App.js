@@ -9,16 +9,64 @@ function App() {
 
   const [breakLength, setBreakLength] = useState(5)
   const [sessionLength, setSessionLength] = useState(25)
+
+  const [minutes, setMinutes] = useState(sessionLength)
   const [seconds, setSeconds] = useState(0)
 
   const [timerStarted, setTimerStarted] = useState(false)
   const [paused, setPaused] = useState(false)
 
-  const [clockTime, setClockTime] = useState(sessionLength)
+  const [clockTime, setClockTime] = useState(
+    `${minutes < 10 ? `0` + minutes : minutes}:${
+      seconds < 10 ? `0` + seconds : seconds
+    }`
+  )
 
-  const now = () => new Date().getTime()
+  // Update clock seconds on sessionLength change
+  useEffect(() => {
+    setMinutes(sessionLength)
+  }, [sessionLength])
 
-  const countdown = () => {}
+  // Update clock seconds on reset
+  useEffect(() => {
+    if (!timerStarted) {
+      setMinutes(sessionLength)
+    }
+  }, [timerStarted])
+
+  // Update clock view
+  useEffect(() => {
+    setClockTime(
+      `${minutes < 10 ? `0` + minutes : minutes}:${
+        seconds < 10 ? `0` + seconds : seconds
+      }`
+    )
+  }, [minutes, seconds])
+
+  useEffect(() => {
+    const newInterval = setInterval(() => {
+      clearInterval(newInterval)
+
+      if (seconds === 0) {
+        if (minutes !== 0) {
+          setSeconds(59)
+          setMinutes(minutes - 1)
+        }
+      } else {
+        setSeconds(seconds - 1)
+      }
+
+      console.log(minutes, seconds)
+
+      if (seconds === 0 && minutes === 0) {
+        alert('owari')
+      }
+    }, 1000)
+
+    if (!timerStarted || paused) {
+      clearInterval(newInterval)
+    }
+  })
 
   const startStopButtonHandle = (e) => {
     if (!timerStarted) {
@@ -28,11 +76,13 @@ function App() {
     if (timerStarted && !paused) {
       e.target.textContent = 'Start'
       setPaused(true)
+      console.log(paused, 'paused')
     }
 
     if (timerStarted && paused) {
       e.target.textContent = 'Pause'
       setPaused(false)
+      console.log(paused, 'paused')
     }
   }
 
@@ -40,10 +90,11 @@ function App() {
     setTimerStarted(false)
     setPaused(false)
     setClockTime('25:00')
-    setSeconds('0')
     setSessionLength(25)
     setBreakLength(5)
     setCurrentSession({ session: 1, break: 1 })
+    setMinutes(sessionLength)
+    setSeconds(0)
   }
 
   return (
