@@ -9,12 +9,16 @@ function TimeSettings({
   sessionLength,
   setSessionLength,
 }) {
+  /* Break */
+
   const breakLengthIncrease = () => {
-    setBreakLength(breakLength + 1)
+    if (breakLength < 60) {
+      setBreakLength(breakLength + 1)
+    }
   }
 
   const breakLengthDecrease = () => {
-    if (breakLength !== 0) {
+    if (breakLength !== 0 && breakLength > 0) {
       setBreakLength(breakLength - 1)
     }
   }
@@ -22,15 +26,36 @@ function TimeSettings({
   const breakInputChange = (e) => {
     const value = Number(e.target.value)
 
+    if (value > 60) {
+      setBreakLength(5)
+      alert('Break length can`t be greater than 60.')
+      e.preventDefault()
+      return false
+    }
+
     setBreakLength(value)
   }
 
+  const checkBreakInput = (e) => {
+    const key = e.key
+    const numberReg = /^\d+$/
+
+    if (!numberReg.test(Number(key)) && key !== 'Backspace') {
+      e.preventDefault()
+      return false
+    }
+  }
+
+  /* Session */
+
   const sessionLengthIncrease = () => {
-    setSessionLength(sessionLength + 1)
+    if (sessionLength < 60) {
+      setSessionLength(sessionLength + 1)
+    }
   }
 
   const sessionLengthDecrease = () => {
-    if (sessionLength !== 0) {
+    if (sessionLength !== 0 && sessionLength > 0) {
       setSessionLength(sessionLength - 1)
     }
   }
@@ -38,7 +63,24 @@ function TimeSettings({
   const sessionInputChange = (e) => {
     const value = Number(e.target.value)
 
+    if (value > 60) {
+      setSessionLength(60)
+      alert('Sessions length can`t be greater than 60.')
+      e.preventDefault()
+      return false
+    }
+
     setSessionLength(value)
+  }
+
+  const checkSessionInput = (e) => {
+    const key = e.key
+    const numberReg = /^\d+$/
+
+    if (!numberReg.test(Number(key)) && key !== 'Backspace') {
+      e.preventDefault()
+      return false
+    }
   }
 
   return (
@@ -56,6 +98,7 @@ function TimeSettings({
             name="break-length"
             value={breakLength}
             onChange={breakInputChange}
+            onKeyDown={checkBreakInput}
           />
         </div>
 
@@ -76,6 +119,8 @@ function TimeSettings({
             name="session-length"
             value={sessionLength}
             onChange={sessionInputChange}
+            onKeyDown={checkSessionInput}
+            max={60}
           />
         </div>
 
