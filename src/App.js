@@ -52,6 +52,7 @@ function App() {
         return
       }
 
+      // Countdown functionality
       if (seconds === 0) {
         if (minutes !== 0) {
           setSeconds(59)
@@ -62,10 +63,32 @@ function App() {
       }
 
       console.log(minutes, seconds)
+      console.log(currentSession)
 
+      // Time out
       if (seconds === 0 && minutes === 0) {
         alert('owari')
-        clearInterval(newInterval)
+
+        // Change session to break
+        if (currentSession.session === currentSession.break) {
+          setCurrentSession({
+            ...currentSession,
+            session: currentSession.session + 1,
+          })
+
+          setMinutes(breakLength)
+          setSeconds(0)
+        }
+        // Change break to session
+        else {
+          setCurrentSession({
+            ...currentSession,
+            break: currentSession.break + 1,
+          })
+
+          setMinutes(sessionLength)
+          setSeconds(0)
+        }
       }
     }, 1000)
 
@@ -104,7 +127,12 @@ function App() {
   return (
     <div className="App">
       <h1 id="timer-label" className="total-sb">
-        Session 1
+        {currentSession.session === currentSession.break
+          ? 'Session '
+          : 'Break '}
+        {currentSession.session === currentSession.break
+          ? currentSession.session
+          : currentSession.break}
       </h1>
       <Clock clockTime={clockTime} />
       {timerStarted ? (
