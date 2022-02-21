@@ -47,6 +47,11 @@ function App() {
     const newInterval = setInterval(() => {
       clearInterval(newInterval)
 
+      if (!timerStarted || paused) {
+        clearInterval(newInterval)
+        return
+      }
+
       if (seconds === 0) {
         if (minutes !== 0) {
           setSeconds(59)
@@ -60,12 +65,11 @@ function App() {
 
       if (seconds === 0 && minutes === 0) {
         alert('owari')
+        clearInterval(newInterval)
       }
     }, 1000)
 
-    if (!timerStarted || paused) {
-      clearInterval(newInterval)
-    }
+    return () => clearInterval(newInterval)
   })
 
   const startStopButtonHandle = (e) => {
