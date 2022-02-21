@@ -134,7 +134,11 @@ function App() {
           ? currentSession.session
           : currentSession.break}
       </h1>
-      <Clock clockTime={clockTime} />
+      <Clock
+        clockTime={clockTime}
+        timerStarted={timerStarted}
+        paused={paused}
+      />
       {timerStarted ? (
         ''
       ) : (

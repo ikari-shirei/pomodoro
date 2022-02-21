@@ -13,10 +13,25 @@
 
     border: 16px solid $color1;
     border-radius: 50px;
+    transition: 0.3s;
 
     h1 {
       margin: 0;
       @include BoldHeader();
     }
+  }
+
+  .timer-started {
+    border-radius: 100%;
+    transition: 1s;
+    border-color: $color3;
+    color: $color3;
+  }
+
+  .paused {
+    border-radius: 100%;
+    transition: 1s;
+    border-color: $color4;
+    color: $color4;
   }
 }
