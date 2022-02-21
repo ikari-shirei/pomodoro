@@ -8,78 +8,33 @@ function TimeSettings({
   setBreakLength,
   sessionLength,
   setSessionLength,
+  timerStarted,
 }) {
   /* Break */
 
   const breakLengthIncrease = () => {
-    if (breakLength < 60) {
+    if (breakLength < 60 && !timerStarted) {
       setBreakLength(breakLength + 1)
     }
   }
 
   const breakLengthDecrease = () => {
-    if (breakLength !== 0 && breakLength > 0) {
+    if (breakLength > 1 && !timerStarted) {
       setBreakLength(breakLength - 1)
-    }
-  }
-
-  const breakInputChange = (e) => {
-    const value = Number(e.target.value)
-
-    if (value > 60) {
-      setBreakLength(5)
-      alert('Break length can`t be greater than 60.')
-      e.preventDefault()
-      return false
-    }
-
-    setBreakLength(value)
-  }
-
-  const checkBreakInput = (e) => {
-    const key = e.key
-    const numberReg = /^\d+$/
-
-    if (!numberReg.test(Number(key)) && key !== 'Backspace') {
-      e.preventDefault()
-      return false
     }
   }
 
   /* Session */
 
   const sessionLengthIncrease = () => {
-    if (sessionLength < 60) {
+    if (sessionLength < 60 && !timerStarted) {
       setSessionLength(sessionLength + 1)
     }
   }
 
   const sessionLengthDecrease = () => {
-    if (sessionLength !== 0 && sessionLength > 0) {
+    if (sessionLength > 1 && !timerStarted) {
       setSessionLength(sessionLength - 1)
-    }
-  }
-
-  const sessionInputChange = (e) => {
-    const value = Number(e.target.value)
-
-    if (value > 60) {
-      setSessionLength(60)
-      alert('Sessions length can`t be greater than 60.')
-      e.preventDefault()
-      return false
-    }
-
-    setSessionLength(value)
-  }
-
-  const checkSessionInput = (e) => {
-    const key = e.key
-    const numberReg = /^\d+$/
-
-    if (!numberReg.test(Number(key)) && key !== 'Backspace') {
-      e.preventDefault()
-      return false
     }
   }
 
@@ -92,14 +47,9 @@ function TimeSettings({
 
         <div className="label-input">
           <label htmlFor="break-length">Break</label>
-          <input
-            type="text"
-            id="break-length"
-            name="break-length"
-            value={breakLength}
-            onChange={breakInputChange}
-            onKeyDown={checkBreakInput}
-          />
+          <div className="value" id="break-length" name="break-length">
+            {breakLength}
+          </div>
         </div>
 
         <button id="break-decrement" onClick={breakLengthDecrease}>
@@ -113,15 +63,9 @@ function TimeSettings({
 
         <div className="label-input">
           <label htmlFor="session-length">Session</label>
-          <input
-            type="text"
-            id="session-length"
-            name="session-length"
-            value={sessionLength}
-            onChange={sessionInputChange}
-            onKeyDown={checkSessionInput}
-            max={60}
-          />
+          <div className="value" id="session-length" name="session-length">
+            {sessionLength}
+          </div>
         </div>
 
         <button id="session-decrement">

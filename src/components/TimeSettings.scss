@@ -44,7 +44,7 @@
         @include BoldSmall();
       }
 
-      input {
+      .value {
         color: $color1;
         background-color: transparent;
         border: 0;

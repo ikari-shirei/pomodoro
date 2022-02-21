@@ -147,6 +147,7 @@ function App() {
           setBreakLength={setBreakLength}
           sessionLength={sessionLength}
           setSessionLength={setSessionLength}
+          timerStarted={timerStarted}
         />
       )}
 
