@@ -1,4 +1,3 @@
-import { HistoryRounded } from '@material-ui/icons'
 import { React, useState } from 'react'
 import './Info.scss'
 

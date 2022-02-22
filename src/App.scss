@@ -10,8 +10,17 @@
   color: $color1;
 
   .total-sb {
-    @include ItalicLight();
+    font-size: 24px;
+    font-style: italic;
+    font-weight: bold;
     margin-top: 24px;
     margin-bottom: 24px;
+    transition: 0.1s;
+    opacity: 0;
+  }
+
+  .timer-active-header {
+    transition: 0.3s;
+    opacity: 1;
   }
 }

@@ -24,12 +24,6 @@ $color2: #fef5ed;
 $color3: #7dd65d;
 $color4: #c93d3d;
 
-@mixin ItalicLight {
-  font-style: italic;
-  font-weight: 300;
-  font-size: 24px;
-}
-
 @mixin ItalicLightButton {
   font-family: Roboto;
   font-style: normal;

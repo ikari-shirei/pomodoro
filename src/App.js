@@ -128,12 +128,15 @@ function App() {
     }
   }
 
+  const headerActive = timerStarted ? 'timer-active-header' : ''
+
   return (
     <div className="App">
-      <h1 id="timer-label" className="total-sb">
+      <h1 id="timer-label" className={`total-sb ${headerActive}`}>
         {currentSession.session === currentSession.break
           ? 'Session '
           : 'Break '}
+
         {currentSession.session === currentSession.break
           ? currentSession.session
           : currentSession.break}
