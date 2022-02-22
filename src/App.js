@@ -48,6 +48,7 @@ function App() {
     )
   }, [minutes, seconds])
 
+  // Clock functionality
   useEffect(() => {
     const newInterval = setTimeout(() => {
       clearTimeout(newInterval)

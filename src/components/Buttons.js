@@ -6,7 +6,6 @@ function Buttons({
   resetButtonHandle,
   timerStarted,
   paused,
-  setPaused,
 }) {
   return (
     <div className="Buttons">

@@ -2,6 +2,7 @@
 
 .Info {
   h2 {
+    font-style: italic;
     text-align: center;
     margin: 32px;
     margin-bottom: 0;
@@ -32,6 +33,7 @@
         &:first-child {
           font-size: 24px;
           font-weight: bold;
+          font-style: italic;
         }
 
         span {
@@ -48,10 +50,5 @@
   .show-ul {
     display: block;
     background-color: $color2;
-    border-radius: 16px;
-  }
-
-  .hide {
-    display: block;
   }
 }
