@@ -117,16 +117,18 @@ function App() {
   }
 
   const resetButtonHandle = () => {
-    setTimerStarted(false)
-    setPaused(false)
-    setClockTime('25:00')
-    setSessionLength(25)
-    setBreakLength(5)
-    setCurrentSession({ session: 1, break: 1 })
-    setMinutes(sessionLength)
-    setSeconds(0)
+    if (timerStarted) {
+      setTimerStarted(false)
+      setPaused(false)
+      setClockTime('25:00')
+      setSessionLength(25)
+      setBreakLength(5)
+      setCurrentSession({ session: 1, break: 1 })
+      setMinutes(sessionLength)
+      setSeconds(0)
 
-    audio.pause()
+      audio.pause()
+    }
   }
 
   return (

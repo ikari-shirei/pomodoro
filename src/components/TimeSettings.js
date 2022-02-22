@@ -22,43 +22,51 @@ function TimeSettings({
   /* Break */
 
   const breakLengthIncrease = () => {
-    if ((breakLength < 60 && !timerStarted) || paused) {
-      setBreakLength((prev) => prev + 1)
-    }
+    if (breakLength < 60) {
+      if (!timerStarted || (timerStarted && paused)) {
+        setBreakLength((prev) => prev + 1)
 
-    if (currentSession.session !== currentSession.break) {
-      resetSec()
+        if (currentSession.session !== currentSession.break) {
+          resetSec()
+        }
+      }
     }
   }
 
   const breakLengthDecrease = () => {
-    if ((breakLength > 1 && !timerStarted) || paused) {
-      setBreakLength((prev) => prev - 1)
-    }
+    if (breakLength > 1) {
+      if (!timerStarted || (timerStarted && paused)) {
+        setBreakLength((prev) => prev - 1)
 
-    if (currentSession.session !== currentSession.break) {
-      resetSec()
+        if (currentSession.session !== currentSession.break) {
+          resetSec()
+        }
+      }
     }
   }
 
   /* Session */
 
   const sessionLengthIncrease = () => {
-    if ((sessionLength < 60 && !timerStarted) || paused) {
-      setSessionLength((prev) => prev + 1)
+    if (sessionLength < 60) {
+      if (!timerStarted || (timerStarted && paused)) {
+        setSessionLength((prev) => prev + 1)
 
-      if (currentSession.session === currentSession.break) {
-        resetSec()
+        if (currentSession.session === currentSession.break) {
+          resetSec()
+        }
       }
     }
   }
 
   const sessionLengthDecrease = () => {
-    if ((sessionLength > 1 && !timerStarted) || paused) {
-      setSessionLength((prev) => prev - 1)
+    if (sessionLength > 1) {
+      if (!timerStarted || (timerStarted && paused)) {
+        setSessionLength((prev) => prev - 1)
 
-      if (currentSession.session === currentSession.break) {
-        resetSec()
+        if (currentSession.session === currentSession.break) {
+          resetSec()
+        }
       }
     }
   }
