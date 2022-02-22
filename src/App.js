@@ -3,7 +3,8 @@ import './App.scss'
 import TimeSettings from './components/TimeSettings'
 import Clock from './components/Clock'
 import Buttons from './components/Buttons'
-import sound from './utils/sound.mp3'
+import beep from './utils/sound.mp3'
+import useSound from 'use-sound'
 
 function App() {
   const [currentSession, setCurrentSession] = useState({ session: 1, break: 1 })
@@ -23,7 +24,7 @@ function App() {
     }`
   )
 
-  let audio = new Audio(sound)
+  const [play, { stop }] = useSound(beep)
 
   // Update clock seconds and minutes on sessionLength change
   useEffect(() => {
@@ -65,12 +66,9 @@ function App() {
         setSeconds(seconds - 1)
       }
 
-      console.log(minutes, seconds)
-      console.log(currentSession)
-
       // Time out
       if (seconds === 0 && minutes === 0) {
-        audio.play()
+        play()
 
         // Change session to break
         if (currentSession.session === currentSession.break) {
@@ -106,13 +104,11 @@ function App() {
     if (timerStarted && !paused) {
       e.target.textContent = 'Start'
       setPaused(true)
-      console.log(paused, 'paused')
     }
 
     if (timerStarted && paused) {
       e.target.textContent = 'Pause'
       setPaused(false)
-      console.log(paused, 'paused')
     }
   }
 
@@ -127,7 +123,7 @@ function App() {
       setMinutes(sessionLength)
       setSeconds(0)
 
-      audio.pause()
+      stop()
     }
   }
 
