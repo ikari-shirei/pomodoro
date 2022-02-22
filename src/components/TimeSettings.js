@@ -9,32 +9,57 @@ function TimeSettings({
   sessionLength,
   setSessionLength,
   timerStarted,
+  paused,
+  setSeconds,
+  currentSession,
 }) {
+  const resetSec = () => {
+    if (paused) {
+      setSeconds(0)
+    }
+  }
+
   /* Break */
 
   const breakLengthIncrease = () => {
-    if (breakLength < 60 && !timerStarted) {
-      setBreakLength(breakLength + 1)
+    if ((breakLength < 60 && !timerStarted) || paused) {
+      setBreakLength((prev) => prev + 1)
+    }
+
+    if (currentSession.session !== currentSession.break) {
+      resetSec()
     }
   }
 
   const breakLengthDecrease = () => {
-    if (breakLength > 1 && !timerStarted) {
-      setBreakLength(breakLength - 1)
+    if ((breakLength > 1 && !timerStarted) || paused) {
+      setBreakLength((prev) => prev - 1)
+    }
+
+    if (currentSession.session !== currentSession.break) {
+      resetSec()
     }
   }
 
   /* Session */
 
   const sessionLengthIncrease = () => {
-    if (sessionLength < 60 && !timerStarted) {
-      setSessionLength(sessionLength + 1)
+    if ((sessionLength < 60 && !timerStarted) || paused) {
+      setSessionLength((prev) => prev + 1)
+
+      if (currentSession.session === currentSession.break) {
+        resetSec()
+      }
     }
   }
 
   const sessionLengthDecrease = () => {
-    if (sessionLength > 1 && !timerStarted) {
-      setSessionLength(sessionLength - 1)
+    if ((sessionLength > 1 && !timerStarted) || paused) {
+      setSessionLength((prev) => prev - 1)
+
+      if (currentSession.session === currentSession.break) {
+        resetSec()
+      }
     }
   }
 

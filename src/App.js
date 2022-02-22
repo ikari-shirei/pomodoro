@@ -9,7 +9,7 @@ function App() {
   const [currentSession, setCurrentSession] = useState({ session: 1, break: 1 })
 
   const [breakLength, setBreakLength] = useState(5)
-  const [sessionLength, setSessionLength] = useState(0)
+  const [sessionLength, setSessionLength] = useState(25)
 
   const [minutes, setMinutes] = useState(sessionLength)
   const [seconds, setSeconds] = useState(0)
@@ -25,12 +25,12 @@ function App() {
 
   let audio = new Audio(sound)
 
-  // Update clock seconds on sessionLength change
+  // Update clock seconds and minutes on sessionLength change
   useEffect(() => {
     setMinutes(sessionLength)
   }, [sessionLength])
 
-  // Update clock seconds on reset
+  // Update clock seconds and minutes on reset
   useEffect(() => {
     if (!timerStarted) {
       setMinutes(sessionLength)
@@ -47,11 +47,11 @@ function App() {
   }, [minutes, seconds])
 
   useEffect(() => {
-    const newInterval = setInterval(() => {
-      clearInterval(newInterval)
+    const newInterval = setTimeout(() => {
+      clearTimeout(newInterval)
 
       if (!timerStarted || paused) {
-        clearInterval(newInterval)
+        clearTimeout(newInterval)
         return
       }
 
@@ -95,7 +95,7 @@ function App() {
       }
     }, 1000)
 
-    return () => clearInterval(newInterval)
+    return () => clearTimeout(newInterval)
   })
 
   const startStopButtonHandle = (e) => {
@@ -151,6 +151,9 @@ function App() {
         sessionLength={sessionLength}
         setSessionLength={setSessionLength}
         timerStarted={timerStarted}
+        paused={paused}
+        setSeconds={setSeconds}
+        currentSession={currentSession}
       />
 
       <Buttons
