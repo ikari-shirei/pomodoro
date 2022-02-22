@@ -143,16 +143,15 @@ function App() {
         paused={paused}
       />
 
-      <TimeSettings
-        breakLength={breakLength}
-        setBreakLength={setBreakLength}
-        sessionLength={sessionLength}
-        setSessionLength={setSessionLength}
-        timerStarted={timerStarted}
-        paused={paused}
-        setSeconds={setSeconds}
-        currentSession={currentSession}
-      />
+      {!timerStarted && (
+        <TimeSettings
+          breakLength={breakLength}
+          setBreakLength={setBreakLength}
+          sessionLength={sessionLength}
+          setSessionLength={setSessionLength}
+          timerStarted={timerStarted}
+        />
+      )}
 
       <Buttons
         startStopButtonHandle={startStopButtonHandle}
