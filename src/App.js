@@ -3,12 +3,13 @@ import './App.scss'
 import TimeSettings from './components/TimeSettings'
 import Clock from './components/Clock'
 import Buttons from './components/Buttons'
+import sound from './utils/sound.mp3'
 
 function App() {
   const [currentSession, setCurrentSession] = useState({ session: 1, break: 1 })
 
   const [breakLength, setBreakLength] = useState(5)
-  const [sessionLength, setSessionLength] = useState(25)
+  const [sessionLength, setSessionLength] = useState(0)
 
   const [minutes, setMinutes] = useState(sessionLength)
   const [seconds, setSeconds] = useState(0)
@@ -21,6 +22,8 @@ function App() {
       seconds < 10 ? `0` + seconds : seconds
     }`
   )
+
+  let audio = new Audio(sound)
 
   // Update clock seconds on sessionLength change
   useEffect(() => {
@@ -67,7 +70,7 @@ function App() {
 
       // Time out
       if (seconds === 0 && minutes === 0) {
-        alert('owari')
+        audio.play()
 
         // Change session to break
         if (currentSession.session === currentSession.break) {
@@ -122,6 +125,8 @@ function App() {
     setCurrentSession({ session: 1, break: 1 })
     setMinutes(sessionLength)
     setSeconds(0)
+
+    audio.pause()
   }
 
   return (
@@ -139,17 +144,14 @@ function App() {
         timerStarted={timerStarted}
         paused={paused}
       />
-      {timerStarted ? (
-        ''
-      ) : (
-        <TimeSettings
-          breakLength={breakLength}
-          setBreakLength={setBreakLength}
-          sessionLength={sessionLength}
-          setSessionLength={setSessionLength}
-          timerStarted={timerStarted}
-        />
-      )}
+
+      <TimeSettings
+        breakLength={breakLength}
+        setBreakLength={setBreakLength}
+        sessionLength={sessionLength}
+        setSessionLength={setSessionLength}
+        timerStarted={timerStarted}
+      />
 
       <Buttons
         startStopButtonHandle={startStopButtonHandle}

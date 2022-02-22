@@ -40,7 +40,7 @@ function TimeSettings({
 
   return (
     <div className="TimeSettings">
-      <div id="break-label">
+      <div id="break-label" className={timerStarted ? 'timer-started' : ''}>
         <button id="break-increment" onClick={breakLengthIncrease}>
           <ArrowUpward className="arrow-icon" />
         </button>
@@ -56,7 +56,7 @@ function TimeSettings({
           <ArrowDownward className="arrow-icon" />
         </button>
       </div>
-      <div id="session-label">
+      <div id="session-label" className={timerStarted ? 'timer-started' : ''}>
         <button id="session-increment">
           <ArrowUpward className="arrow-icon" onClick={sessionLengthIncrease} />
         </button>

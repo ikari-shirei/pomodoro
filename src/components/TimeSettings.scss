@@ -7,6 +7,11 @@
   color: $color1;
   margin-top: 32px;
 
+  .timer-started {
+    cursor: default;
+    opacity: 0.5;
+  }
+
   #break-label,
   #session-label {
     display: flex;
