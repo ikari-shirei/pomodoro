@@ -3,6 +3,7 @@ import './App.scss'
 import TimeSettings from './components/TimeSettings'
 import Clock from './components/Clock'
 import Buttons from './components/Buttons'
+import Info from './components/Info'
 import beep from './utils/sound.mp3'
 import useSound from 'use-sound'
 
@@ -160,6 +161,15 @@ function App() {
         paused={paused}
         setPaused={setPaused}
       />
+
+      {timerStarted && (
+        <Info
+          currentSession={currentSession}
+          sessionLength={sessionLength}
+          breakLength={breakLength}
+          minutes={minutes}
+        />
+      )}
     </div>
   )
 }
