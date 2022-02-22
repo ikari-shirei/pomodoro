@@ -1,7 +1,10 @@
-import React from 'react'
+import { HistoryRounded } from '@material-ui/icons'
+import { React, useState } from 'react'
 import './Info.scss'
 
 function Info({ currentSession, sessionLength, breakLength, minutes }) {
+  const [status, setStatus] = useState(false)
+
   const calculateTotalMin = () => {
     const session = currentSession.session
     const brk = currentSession.break
@@ -39,16 +42,51 @@ function Info({ currentSession, sessionLength, breakLength, minutes }) {
     }
   }
 
+  const changeStatus = () => {
+    setStatus((prev) => !prev)
+  }
+
   return (
     <div className="Info">
-      <h2>Info</h2>
-      <ul>
-        <li>Session: {currentSession.session}</li>
-        <li>Break: {currentSession.break}</li>
-        <li>Session Time: {sessionLength} minutes</li>
-        <li>Break Time: {breakLength} minutes</li>
-        <li>Total Minutes Passed: {calculateTotalMin()} minutes</li>
-        <li>Total Time Passed: {calculateTotal()} hours</li>
+      <h2 onClick={changeStatus}>Info</h2>
+
+      <ul className={!status ? 'hide-ul' : 'show-ul'}>
+        <li>
+          <div>Session</div>
+          <div>
+            <span>{currentSession.session}</span>
+          </div>
+        </li>
+        <li>
+          <div>Break</div>
+          <div>
+            <span>{currentSession.break}</span>
+          </div>
+        </li>
+        <li>
+          <div>Session Time</div>
+          <div>
+            <span>{sessionLength}</span> minutes
+          </div>
+        </li>
+        <li>
+          <div>Break Time</div>
+          <div>
+            <span>{breakLength}</span> minutes
+          </div>
+        </li>
+        <li>
+          <div>Minutes Passed</div>
+          <div>
+            <span>{calculateTotalMin()}</span> minutes
+          </div>
+        </li>
+        <li>
+          <div>Time Passed</div>
+          <div>
+            <span>{calculateTotal()}</span> hours
+          </div>
+        </li>
       </ul>
     </div>
   )

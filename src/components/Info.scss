@@ -1,23 +1,57 @@
 @import '../index.scss';
 
 .Info {
-  background-color: $color1;
-  color: $color2;
-  border-radius: 15px;
-
-  width: 300px;
-  height: 300px;
-
   h2 {
-    margin: 0;
-    padding: 0;
+    text-align: center;
+    margin: 32px;
+    margin-bottom: 0;
+    padding: 8px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   ul {
     margin: 0;
-    padding: 0;
+    padding: 16px;
+    margin-bottom: 32px;
+    border-radius: 16px;
+    min-width: 320px;
+    display: none;
+
     li {
       list-style-type: none;
+      padding-top: 8px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+
+      div {
+        &:first-child {
+          font-size: 24px;
+          font-weight: bold;
+        }
+
+        span {
+          font-weight: bold;
+        }
+      }
     }
+  }
+
+  .hide-ul {
+    display: none;
+  }
+
+  .show-ul {
+    display: block;
+    background-color: $color2;
+    border-radius: 16px;
+  }
+
+  .hide {
+    display: block;
   }
 }
